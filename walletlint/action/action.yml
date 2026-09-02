@@ -1,0 +1,28 @@
+name: 'WalletLint'
+description: 'Run WalletLint security analysis on Hardhat/Foundry traces'
+author: 'Your Name'
+branding:
+  icon: 'shield'
+  color: 'purple'
+
+inputs:
+  trace-file:
+    description: 'Path to the trace JSON file'
+    required: true
+    default: './forge-trace.json'
+  format:
+    description: 'Output format: terminal | json'
+    required: false
+    default: 'terminal'
+  fail-on-warn:
+    description: 'Fail the action on warnings (not just blocks)'
+    required: false
+    default: 'false'
+  rpc:
+    description: 'RPC endpoint for on-chain lookups'
+    required: false
+    default: 'https://eth.llamarpc.com'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
