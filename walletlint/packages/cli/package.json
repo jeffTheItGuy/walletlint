@@ -1,0 +1,30 @@
+{
+  "name": "@walletlint/cli",
+  "version": "0.1.0",
+  "description": "ESLint for wallet interactions",
+  "bin": {
+    "walletlint": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@walletlint/abi-resolver": "workspace:*",
+    "@walletlint/config": "workspace:*",
+    "@walletlint/core": "workspace:*",
+    "@walletlint/parsers": "workspace:*",
+    "@walletlint/reporter": "workspace:*",
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "viem": "^2.0.0",
+    "yaml": "^2.4.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
+  }
+}

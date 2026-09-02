@@ -1,0 +1,1 @@
+export { TraceDecoder } from './viem-decoder';
