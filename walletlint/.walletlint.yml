@@ -1,0 +1,17 @@
+# Example WalletLint configuration
+rules:
+  unlimited-approve: true
+  unverified-contract: true
+  raw-eth-sign: true
+  unknown-selector: true
+  new-recipient: true
+  permit-signature: true
+  malicious-address: true
+  high-value-transfer: true
+
+rpc: https://eth.llamarpc.com
+output: terminal
+failOnWarn: false
+
+thresholds:
+  highValueEth: "1000000000000000000" # 1 ETH in wei

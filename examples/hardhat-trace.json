@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "name": "should approve tokens",
+      "transactions": [
+        {
+          "txHash": "0x1111111111111111111111111111111111111111111111111111111111111111",
+          "from": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "to": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "input": "0x095ea7b30000000000000000000000001111111111111111111111111111111111111111ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "value": "0",
+          "blockNumber": 18000000
+        }
+      ]
+    },
+    {
+      "name": "should transfer ETH",
+      "transactions": [
+        {
+          "txHash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+          "from": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "to": "0xcccccccccccccccccccccccccccccccccccccccc",
+          "input": "0x",
+          "value": "5000000000000000000",
+          "blockNumber": 18000001
+        }
+      ]
+    }
+  ]
+}
