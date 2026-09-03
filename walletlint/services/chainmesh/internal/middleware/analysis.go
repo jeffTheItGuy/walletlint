@@ -13,8 +13,6 @@ import (
 	"github.com/your-org/walletlint/services/chainmesh/internal/storage"
 )
 
-// Middleware intercepts eth_sendRawTransaction and eth_sendTransaction calls
-// for async WalletLint analysis without blocking the RPC response.
 func Middleware(store *storage.Store, cache *cache.Client) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -33,7 +31,6 @@ func Middleware(store *storage.Store, cache *cache.Client) func(http.Handler) ht
 			var req rpcRequest
 			if err := json.Unmarshal(body, &req); err == nil {
 				if isTransactionMethod(req.Method) {
-					// Async analysis — fire and forget
 					go analyzeTransaction(r.Context(), req, store, cache)
 				}
 			}
@@ -51,17 +48,16 @@ type rpcRequest struct {
 }
 
 func isTransactionMethod(method string) bool {
-	return method == "eth_sendRawTransaction" || method == "eth_sendTransaction"
+	return method == "eth_sendRawTransaction" ||
+		method == "eth_sendTransaction" ||
+		method == "sendTransaction" ||
+		method == "sendRawTransaction"
 }
 
 func analyzeTransaction(ctx context.Context, req rpcRequest, store *storage.Store, cache *cache.Client) {
-	// TODO: decode raw tx, run WalletLint analysis via HTTP call to TS engine
-	// or import shared protobuf schema. For now, store a placeholder finding.
-
-	tenantID := "default" // extract from auth header in production
+	tenantID := "default"
 	txHash := extractTxHash(req.Params)
 
-	// Check cache to skip re-analysis
 	if cache.Has(ctx, txHash) {
 		return
 	}

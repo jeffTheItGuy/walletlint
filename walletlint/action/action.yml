@@ -22,6 +22,10 @@ inputs:
     description: 'RPC endpoint for on-chain lookups'
     required: false
     default: 'https://eth.llamarpc.com'
+  chain:
+    description: 'Chain family: evm | solana'
+    required: false
+    default: 'evm'
 
 runs:
   using: 'node20'

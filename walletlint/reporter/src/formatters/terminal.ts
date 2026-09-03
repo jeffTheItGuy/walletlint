@@ -14,8 +14,15 @@ export class TerminalReporter {
     const infos = findings.filter((f) => f.severity === 'INFO');
     const clean = findings.length === 0 ? 1 : 0;
 
+    const chains = [...new Set(findings.map((f) => f.metadata?.chain as string | undefined).filter(Boolean))];
+
     const lines: string[] = [];
     lines.push('');
+
+    if (chains.length > 0) {
+      lines.push(`🔗  Chain: ${chains.join(', ')}`);
+      lines.push('');
+    }
 
     if (blocks.length > 0) {
       lines.push(`${ICONS.BLOCK}  ${blocks.length} BLOCK-LEVEL`);

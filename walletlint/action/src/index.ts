@@ -18,13 +18,15 @@ async function run(): Promise<void> {
     const format = core.getInput('format') || 'terminal';
     const failOnWarn = core.getBooleanInput('fail-on-warn');
     const rpc = core.getInput('rpc') || 'https://eth.llamarpc.com';
+    const chain = core.getInput('chain') || 'evm';
 
-    core.info(`🔍 Running WalletLint on ${traceFile}...`);
+    core.info(`🔍 Running WalletLint on ${traceFile} (chain: ${chain})...`);
 
     const args = [
       'walletlint', 'analyze', traceFile,
       '--format', 'json',
       '--rpc', rpc,
+      '--chain', chain,
     ];
     if (failOnWarn) {
       args.push('--fail-on-warn');
@@ -42,7 +44,6 @@ async function run(): Promise<void> {
       ignoreReturnCode: true,
     });
 
-    // Try to parse JSON findings even if CLI exited non-zero
     let findings: Finding[] = [];
     try {
       findings = JSON.parse(output) as Finding[];
@@ -52,7 +53,6 @@ async function run(): Promise<void> {
       core.info(output || errorOutput);
     }
 
-    // Summarize
     const blocks = findings.filter((f) => f.severity === 'BLOCK');
     const warns = findings.filter((f) => f.severity === 'WARN');
     const infos = findings.filter((f) => f.severity === 'INFO');
@@ -62,7 +62,6 @@ async function run(): Promise<void> {
     core.info(`   ⚠️  WARN:  ${warns.length}`);
     core.info(`   ℹ️  INFO:  ${infos.length}`);
 
-    // PR Annotations
     if (github.context.payload.pull_request && findings.length > 0) {
       const octokit = github.getOctokit(process.env.GITHUB_TOKEN || '');
       const { owner, repo } = github.context.repo;
@@ -102,7 +101,6 @@ async function run(): Promise<void> {
       }
     }
 
-    // Set outputs
     core.setOutput('block-count', blocks.length);
     core.setOutput('warn-count', warns.length);
     core.setOutput('info-count', infos.length);

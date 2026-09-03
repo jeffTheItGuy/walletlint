@@ -1,3 +1,2 @@
-export * from './types';
-export { TraceDecoder } from './decoder';
-export { RulesEngine, getAllRules, getRuleById } from './rules';
+export * from './types/index.js';
+export { RulesEngine } from './rules/index.js';

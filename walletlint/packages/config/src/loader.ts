@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 import YAML from 'yaml';
-import { WalletLintConfigSchema, type WalletLintConfig } from './schema';
+import { WalletLintConfigSchema, type WalletLintConfig } from '../../../../walletlint-rest/walletlint/packages/config/src/schema.js';
 
 const CONFIG_NAMES = [
   '.walletlint.yml',

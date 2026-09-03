@@ -1,0 +1,21 @@
+{
+  "name": "@walletlint/evm",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@walletlint/abi-resolver": "workspace:*",
+    "@walletlint/core": "workspace:*",
+    "viem": "^2.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
+  }
+}

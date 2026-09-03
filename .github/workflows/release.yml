@@ -1,8 +1,8 @@
 name: Release
 
 on:
-  push:
-    branches: [main]
+  workflow-dispatch:
+
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 

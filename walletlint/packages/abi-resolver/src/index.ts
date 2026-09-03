@@ -1,2 +1,2 @@
-export { EtherscanResolver, type EtherscanOptions } from './etherscan';
-export { FourByteResolver, type FourByteSignature } from './fourbyte';
+export { EtherscanResolver, type EtherscanOptions } from './etherscan.js';
+export { FourByteResolver, type FourByteSignature } from './fourbyte.js';

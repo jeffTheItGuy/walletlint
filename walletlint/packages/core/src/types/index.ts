@@ -1,6 +1,6 @@
-import type { PublicClient } from 'viem';
-
 export type Severity = 'BLOCK' | 'WARN' | 'INFO';
+
+export type ChainFamily = 'evm' | 'solana';
 
 export interface Finding {
   ruleId: string;
@@ -11,36 +11,37 @@ export interface Finding {
   metadata?: Record<string, unknown>;
 }
 
-export interface RawTransaction {
-  hash: string;
-  from: `0x${string}`;
-  to: `0x${string}`;
-  data: `0x${string}`;
-  value: bigint | string;
-  blockNumber?: bigint;
-}
-
 export interface ContractInfo {
   isVerified: boolean;
   abi?: unknown;
   name?: string;
 }
 
-export interface DecodedTransaction {
+export interface NormalizedTx {
   hash: string;
-  from: `0x${string}`;
-  to: `0x${string}`;
+  chain: ChainFamily;
+  from: string;
+  to: string;
   value: bigint;
-  data: `0x${string}`;
+  data?: string;
   functionName?: string;
-  functionSelector?: `0x${string}`;
+  functionSelector?: string;
   args?: readonly unknown[];
   contractInfo?: ContractInfo;
   isContractInteraction: boolean;
+  metadata?: Record<string, unknown>;
+}
+
+export interface ChainAdapter {
+  readonly chain: ChainFamily;
+  readonly nativeRules: Rule[];
+  parseTrace(traceJson: unknown): NormalizedTx[] | Promise<NormalizedTx[]>;
+  decode(tx: NormalizedTx): NormalizedTx | Promise<NormalizedTx>;
+  getClient(): unknown;
 }
 
 export interface RuleContext {
-  client?: PublicClient;
+  adapter: ChainAdapter;
   config: Record<string, unknown>;
 }
 
@@ -48,5 +49,6 @@ export interface Rule {
   id: string;
   severity: Severity;
   description: string;
-  analyze(tx: DecodedTransaction, context: RuleContext): Promise<Finding | null> | Finding | null;
+  chains: ChainFamily[];
+  analyze(tx: NormalizedTx, context: RuleContext): Promise<Finding | null> | Finding | null;
 }

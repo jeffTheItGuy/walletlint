@@ -15,7 +15,19 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@walletlint/abi-resolver": ["./packages/abi-resolver/src/index.ts"],
+      "@walletlint/cli": ["./packages/cli/src/index.ts"],
+      "@walletlint/config": ["./packages/config/src/index.ts"],
+      "@walletlint/core": ["./packages/core/src/index.ts"],
+      "@walletlint/core/*": ["./packages/core/src/*"],
+      "@walletlint/evm": ["./packages/evm/src/index.ts"],
+      "@walletlint/evm/*": ["./packages/evm/src/*"],
+      "@walletlint/reporter": ["./packages/reporter/src/index.ts"],
+      "@walletlint/solana": ["./packages/solana/src/index.ts"],
+      "@walletlint/solana/*": ["./packages/solana/src/*"]
+    }
   },
   "exclude": ["node_modules", "dist"]
 }

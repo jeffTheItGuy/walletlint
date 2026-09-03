@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import { analyzeCommand } from './commands/analyze';
-import { scanCommand } from './commands/scan';
-import { rulesCommand } from './commands/rules';
-import { logger } from './utils/logger';
+import { analyzeCommand } from './commands/analyze.js';
+import { scanCommand } from './commands/scan.js';
+import { rulesCommand } from './commands/rules.js';
+import { logger } from './utils/logger.js';
 
 const program = new Command();
 

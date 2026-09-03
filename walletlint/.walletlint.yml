@@ -1,4 +1,6 @@
 # Example WalletLint configuration
+chain: evm
+
 rules:
   unlimited-approve: true
   unverified-contract: true
@@ -15,3 +17,4 @@ failOnWarn: false
 
 thresholds:
   highValueEth: "1000000000000000000" # 1 ETH in wei
+  highValueSol: "1000000000"          # 1 SOL in lamports
